@@ -474,7 +474,7 @@ int DetectCollisionV() {
 //충돌 검사
 int DetectCollision(int posX, int posY) {
 
-	if (posX == 1 || posX + 1 > GBOARD_WIDTH - 4 || posY == 0 || posY == GBOARD_HEIGHT - 1)
+	if (posX == 1 || posX + 1 > GBOARD_WIDTH - 3 || posY == 0 || posY == GBOARD_HEIGHT - 1)
 		return 0;
 
 	return 1;
