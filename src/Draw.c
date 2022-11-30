@@ -5,38 +5,38 @@ extern curPosX;
 extern curPosY;
 
 
-//ì‚¬ê°í˜• ê·¸ë¦¬ê¸°
+//»ç°¢Çü ±×¸®±â
 void drawRect(int posX, int posY, int width, int height) {
 
 	int x, y;
 	for (y = 0; y < height; y++) {
 		SetCurrentCursorPos(posX, posY + y);
 		if (y == 0)
-			printf("â”");
+			printf("¦®");
 		else if (y == height - 1)
-			printf("â”—");
+			printf("¦±");
 		else
-			printf("â”ƒ");
+			printf("¦­");
 	}
 	for (y = 0; y < height; y++) {
 		SetCurrentCursorPos(posX + width - 2, posY + y);
 		if (y == 0)
-			printf("â”“");
+			printf("¦¯");
 		else if (y == height - 1)
-			printf("â”›");
+			printf("¦°");
 		else
-			printf("â”ƒ");
+			printf("¦­");
 	}
 	for (x = 2; x < width - 2; x++) {
 		SetCurrentCursorPos(posX + x, posY);
-		printf("â”");
+		printf("¦¬");
 	}
 	for (x = 2; x < width - 2; x++) {
 		SetCurrentCursorPos(posX + x, posY + height - 1);
-		printf("â”");
+		printf("¦¬");
 	}
 }
-//ë³´ë“œíŒ ë‚´ë¶€ ì§€ìš°ê¸°
+//º¸µåÆÇ ³»ºÎ Áö¿ì±â
 void redrawGameBoard() {
 	int x, y;
 	for (y = 1; y < GBOARD_HEIGHT - 1; y++) {
@@ -51,7 +51,7 @@ void redrawGameBoard() {
 	SetCurrentCursorPos(GBOARD_WIDTH, 0);
 }
 
-//"SELECT MODE" ì¶œë ¥
+//"SELECT MODE" Ãâ·Â
 void printTitle2() {
 	int x = 0, y = 4;
 	YELLOW
@@ -62,7 +62,7 @@ void printTitle2() {
 				for (int j = 0; j < 5; j++) {
 					SetCurrentCursorPos(x, y + j);
 					if (title2[k][j][i] == 1) {
-						printf("â– ");
+						printf("¡á");
 					}
 					else
 						printf("  ");
@@ -79,7 +79,7 @@ void printTitle2() {
 			for (int j = 0; j < 5; j++) {
 				SetCurrentCursorPos(x, y + j);
 				if (title3[k][j][i] == 1)
-					printf("â– ");
+					printf("¡á");
 
 				else
 					printf("  ");
@@ -89,7 +89,7 @@ void printTitle2() {
 		printf("\n");
 	}
 }
-//"RIP COVID" ì¶œë ¥
+//"RIP COVID" Ãâ·Â
 void printTitle1() {
 	int x = 0, y = 9;
 
@@ -99,7 +99,7 @@ void printTitle1() {
 			for (int j = 0; j < 5; j++) {
 				SetCurrentCursorPos(x, y + j);
 				if (title[k][j][i] == 1)
-					printf("â– ");
+					printf("¡á");
 				else
 					printf("  ");
 			}
@@ -117,9 +117,9 @@ void printGameOver() {
 	for (int k = 0; k < 8; k++) {
 		for (int i = 0; i < 5; i++) {
 			if (k < 4)
-				x = (k * 5) * 2 + i * 2 + 22;
+				x = (k * 5) * 2 + i * 2 + 30;
 			else {
-				x = ((k - 4) * 5) * 2 + i * 2 + 23;
+				x = ((k - 4) * 5) * 2 + i * 2 + 31;
 				y = 11;
 			}
 
@@ -127,7 +127,7 @@ void printGameOver() {
 				SetCurrentCursorPos(x, y + j);
 
 				if (gameOver[k][j][i] == 1)
-					printf("â– ");
+					printf("¡á");
 				else
 					printf("  ");
 			}
