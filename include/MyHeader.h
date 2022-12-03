@@ -74,3 +74,8 @@ typedef struct PhoenixItem {
 	int pos_x;
 	int pos_y;
 }PhoenixItem;
+
+typedef struct LifeItem {
+	int pos_x;
+	int pos_y;
+}LifeItem;
