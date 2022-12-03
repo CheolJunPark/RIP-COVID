@@ -70,3 +70,7 @@ typedef struct ClockItem {
 	int pos_y;
 }ClockItem;
 
+typedef struct PhoenixItem {
+	int pos_x;
+	int pos_y;
+}PhoenixItem;
