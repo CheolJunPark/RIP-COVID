@@ -8,7 +8,7 @@ void ShiftRight(void) {
 		return;
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf(" ");
-	humanCurPosX += 2;
+	humanCurPosX += 1;
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf("@");
 
@@ -20,7 +20,7 @@ void ShiftLeft(void) {
 		return;
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf(" ");
-	humanCurPosX -= 2;
+	humanCurPosX -= 1;
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf("@");
 }
