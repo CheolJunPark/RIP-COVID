@@ -7,9 +7,11 @@ extern end_time;
 extern humanCurPosX, humanCurPosY;
 extern clock_item_flag;
 extern phoenix_item_flag;
+extern life_item_flag;
 extern trackingVirus_flag;
 extern trackingVirusOneby_flag;
 extern trackingVirusVertical_flag;
+
 extern clockCurPosX, clockCurPosY;
 extern clock_item_time;
 extern clock_item_time_plus_5sec;
@@ -17,6 +19,8 @@ extern clock_item_time_plus_5sec;
 extern phoenixCurPosX, phoenixCurPosY;
 extern phoenix_item_time;
 extern phoenix_item_time_plus_5sec;
+
+extern lifeCurPosX, lifeCurPosY;
 
 
 void clock_item() {
@@ -31,7 +35,7 @@ void clock_item() {
 	random_number = rand() % 3;
 	clock.pos_x = rand() % 97 + 1;
 	clock.pos_y = rand() % 28 + 1;
-	
+
 	// "C" 아이템 생성
 	if (my_number == random_number && clock_item_flag == 0) {
 		clockCurPosX = clock.pos_x;
@@ -69,8 +73,6 @@ void clock_item() {
 			f = 0;
 		}
 	}
-
-
 }
 
 void phoenix_item() {
@@ -119,4 +121,37 @@ void phoenix_item() {
 			f = 0;
 		}
 	}
+}
+
+void life_item() {
+	LifeItem life;
+	int my_number = 0;
+	int random_number;
+
+	srand((unsigned int)time(NULL));
+	random_number = rand() % 3;
+	life.pos_x = rand() % 97 + 1;
+	life.pos_y = rand() % 28 + 1;
+
+	// "L" 아이템 생성
+	if (my_number == random_number && life_item_flag == 0) {
+		lifeCurPosX = life.pos_x;
+		lifeCurPosY = life.pos_y;
+		SetCurrentCursorPos(lifeCurPosX, lifeCurPosY);
+		printf("L");
+		life_item_flag = 1;
+	}
+
+	// "L"아이템을 먹으면 생명 + 1
+	if (humanCurPosX == lifeCurPosX && humanCurPosY == lifeCurPosY)
+	{
+		life_item_flag = 0;
+		
+		if (game_util.life < 5)
+			game_util.life += 1;
+		updateLife();
+	
+	}
+
+
 }
