@@ -26,6 +26,10 @@ int clock_item_time;
 int clock_item_time_plus_5sec;
 
 
+int phoenixCurPosX = 0, phoenixCurPosY = 0;
+int phoenix_item_time;
+int phoenix_item_time_plus_5sec;
+
 int main() {
 	int i, j, num_cnt = 0;
 	int check = 0;
@@ -68,10 +72,12 @@ int main() {
 
 		check = DetectCollisionV();
 		if (check == 2) {
-			game_util.life = --game_util.life;
-			updateLife();
-			SetCurrentCursorPos(humanCurPosX, humanCurPosY);
-			RED printf("∩\a");
+			if (phoenix_item_flag == 0 || phoenix_item_flag == 1) {
+				game_util.life = --game_util.life;
+				updateLife();
+				SetCurrentCursorPos(humanCurPosX, humanCurPosY);
+				RED printf("∩\a");
+			}
 
 			if (game_util.life == 0) {
 				GameOver();
@@ -105,6 +111,7 @@ int main() {
 		i++;
 		end_time = clock();
 		clock_item();
+		phoenix_item();
 		updateTime();
 	}
 
