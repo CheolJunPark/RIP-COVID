@@ -7,8 +7,10 @@ extern trackingVirus_flag;
 extern trackingVirusOneby_flag;
 extern trackingVirusVertical_flag;
 extern clockCurPosX, clockCurPosY;
-extern clock_item_flag
-;
+extern clock_item_flag;
+extern phoenixCurPosX, phoenixCurPosY;
+extern phoenix_item_flag;
+
 //바이러스 충돌 검사
 int DetectCollisionV() {
 	int i, j;
@@ -20,6 +22,9 @@ int DetectCollisionV() {
 		if (virus[i].x == clockCurPosX && virus[i].y == clockCurPosY) {
 			clock_item_flag = 0;
 		}
+		if (virus[i].x == phoenixCurPosX && virus[i].y == phoenixCurPosY) {
+			phoenix_item_flag = 0;
+		}
 	}
 	for (i = 0; i < v_num; i++) {
 		if (virusOneby[i].x == humanCurPosX && virusOneby[i].y == humanCurPosY) {
@@ -27,6 +32,9 @@ int DetectCollisionV() {
 		}
 		if (virusOneby[i].x == clockCurPosX && virusOneby[i].y == clockCurPosY) {
 			clock_item_flag = 0;
+		}
+		if (virusOneby[i].x == phoenixCurPosX && virusOneby[i].y == phoenixCurPosY) {
+			phoenix_item_flag = 0;
 		}
 	}
 
@@ -36,6 +44,9 @@ int DetectCollisionV() {
 		}
 		if (virusVertical[i].x == clockCurPosX && virusVertical[i].y == clockCurPosY) {
 			clock_item_flag = 0;
+		}
+		if (virusVertical[i].x == phoenixCurPosX && virusVertical[i].y == phoenixCurPosY) {
+			phoenix_item_flag = 0;
 		}
 	}
 	return 1;
