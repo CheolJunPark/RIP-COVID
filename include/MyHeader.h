@@ -64,3 +64,9 @@ struct game_util {
 };
 
 struct game_util game_util;
+
+typedef struct ClockItem {
+	int pos_x;
+	int pos_y;
+}ClockItem;
+
