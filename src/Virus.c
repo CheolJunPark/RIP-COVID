@@ -1,189 +1,132 @@
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
 #include "MyHeader.h"
 
-extern humanCurPosX, humanCurPosY;
-extern v_num;
-extern vertical_num;
-extern trackingVirus_flag;
-extern trackingVirusOneby_flag;
-extern trackingVirusVertical_flag;
-extern clockCurPosX, clockCurPosY;
-extern clock_item_flag;
-extern phoenixCurPosX, phoenixCurPosY;
-extern phoenix_item_flag;
+extern start_time;
+extern end_time;
 
-//바이러스 충돌 검사
-int DetectCollisionV() {
-	int i, j;
+int curPosX, curPosY;
+int humanCurPosX = 50, humanCurPosY = 15;
+int virusCurPosX, virusCurPosY;
+int mode;
+int next = 0;
+int curTime;
 
-	for (i = 0; i < 10; i++) {
-		if (virus[i].x == humanCurPosX && virus[i].y == humanCurPosY) {
-			return 2;
+int v_num = 0;
+int vertical_num = 0;
+
+int clock_item_flag = 0;
+int phoenix_item_flag = 0;
+int life_item_flag = 0;
+
+int trackingVirus_flag = 0;
+int trackingVirusOneby_flag = 0;
+int trackingVirusVertical_flag = 0;
+
+int clockCurPosX = 0, clockCurPosY = 0;
+int clock_item_time;
+int clock_item_time_plus_5sec;
+
+
+int phoenixCurPosX = 0, phoenixCurPosY = 0;
+int phoenix_item_time;
+int phoenix_item_time_plus_5sec;
+
+int lifeCurPosX = 0, lifeCurPosY = 0;
+
+
+int main() {
+	int i, j, num_cnt = 0;
+	int check = 0;
+	int vertical_cnt = 0;
+	int circle_cnt = 0;
+
+	system("mode con:cols=130 lines=30");   // cols: 가로, lines: 세로
+	removeCursor();
+	selectMode();
+	WHITE
+		start_time = clock();
+	createTime();
+	createLife();
+
+	createHuman();
+	createVirus();
+
+	while (1) {
+		int i = 1;
+
+		if (_kbhit())
+			moveHuman();
+
+		Sleep(200);
+
+		if (_kbhit())
+			moveHuman();
+
+		if (i % 100 == 0) {
+			num_cnt++;
 		}
-		if (virus[i].x == clockCurPosX && virus[i].y == clockCurPosY) {
-			clock_item_flag = 0;
+
+		for (j = 0; j <= num_cnt; j++)
+		{
+			createVirusOneby();
 		}
-		if (virus[i].x == phoenixCurPosX && virus[i].y == phoenixCurPosY) {
-			phoenix_item_flag = 0;
+
+		trackingVirus();
+		trackingVirusOneby();
+
+		check = DetectCollisionV();
+		if (check == 2) {
+			if (phoenix_item_flag == 0 || phoenix_item_flag == 1) {
+				game_util.life = --game_util.life;
+				updateLife();
+				SetCurrentCursorPos(humanCurPosX, humanCurPosY);
+				RED printf("∩\a");
+			}
+
+			if (game_util.life == 0) {
+				GameOver();
+				break;
+			}
+			Sleep(500);
+			updateTime();
+			Sleep(500);
 		}
+
+		if (check == 2) {
+			WHITE
+				SetCurrentCursorPos(humanCurPosX, humanCurPosY);
+			printf("  ");
+			createHuman();
+			check = 0;
+		}
+
+		if (vertical_num == 10) {
+			createVirusVertical();
+			//createVirusCircle();
+			//createVirusSquare();
+			vertical_cnt++;
+		}
+
+		if (vertical_cnt >= 1) {
+			trackingVirusVertical();
+		}
+
+		SetCurrentCursorPos(115, 10);
+		printf("%d %d", clockCurPosX, clockCurPosX);
+		SetCurrentCursorPos(115, 15);
+		printf("%d %d", lifeCurPosX, lifeCurPosX);
+
+		Sleep(100);
+		i++;
+		end_time = clock();
+		clock_item();
+		phoenix_item();
+		life_item();
+		updateTime();
 	}
-	for (i = 0; i < v_num; i++) {
-		if (virusOneby[i].x == humanCurPosX && virusOneby[i].y == humanCurPosY) {
-			return 2;
-		}
-		if (virusOneby[i].x == clockCurPosX && virusOneby[i].y == clockCurPosY) {
-			clock_item_flag = 0;
-		}
-		if (virusOneby[i].x == phoenixCurPosX && virusOneby[i].y == phoenixCurPosY) {
-			phoenix_item_flag = 0;
-		}
-	}
 
-	for (i = 0; i < GBOARD_HEIGHT - 2; i++) {
-		if (virusVertical[i].x == humanCurPosX && virusVertical[i].y == humanCurPosY) {
-			return 2;
-		}
-		if (virusVertical[i].x == clockCurPosX && virusVertical[i].y == clockCurPosY) {
-			clock_item_flag = 0;
-		}
-		if (virusVertical[i].x == phoenixCurPosX && virusVertical[i].y == phoenixCurPosY) {
-			phoenix_item_flag = 0;
-		}
-	}
-	return 1;
-}
-
-//충돌 검사
-int DetectCollision(int posX, int posY) {
-
-	if (posX == 1 || posX + 1 > GBOARD_WIDTH - 3 || posY == 0 || posY == GBOARD_HEIGHT - 1)
-		return 0;
-
-	return 1;
-}
-
-
-//추적 바이러스
-void trackingVirus() {
-	if (trackingVirus_flag == 0) {
-		for (int i = 0; i < 5; i++) {
-			SetCurrentCursorPos(virus[i].x, virus[i].y);
-			printf(" ");
-
-			int x, y;
-			x = virus[i].x - humanCurPosX;
-			y = virus[i].y - humanCurPosY;
-
-			if (x == 0 && y == 0)
-				continue;
-			else if (x == 0) {
-				if (y > 0)
-					virus[i].y--;
-				else
-					virus[i].y++;
-			}
-			else if (y == 0) {
-				if (x > 0)
-					virus[i].x--;
-				else
-					virus[i].x++;
-			}
-			else if (x > 0 && y > 0) {
-				virus[i].x--;
-				virus[i].y--;
-			}
-			else if (x > 0 && y < 0) {
-				virus[i].x--;
-				virus[i].y++;
-			}
-			else if (x < 0 && y > 0) {
-				virus[i].x++;
-				virus[i].y--;
-			}
-			else {
-				virus[i].x++;
-				virus[i].y++;
-			}
-
-			RED
-				SetCurrentCursorPos(virus[i].x, virus[i].y);
-			printf("*");
-		}
-		WHITE
-	}
-}
-
-void trackingVirusOneby() {
-	if (trackingVirusOneby_flag == 0) {
-		for (int i = 0; i < v_num; i++) {
-			SetCurrentCursorPos(virusOneby[i].x, virusOneby[i].y);
-			printf(" ");
-
-			int x, y;
-			x = virusOneby[i].x - humanCurPosX;
-			y = virusOneby[i].y - humanCurPosY;
-
-			if (x == 0 && y == 0)
-				continue;
-			else if (x == 0) {
-				if (y > 0)
-					virusOneby[i].y--;
-				else
-					virusOneby[i].y++;
-			}
-			else if (y == 0) {
-				if (x > 0)
-					virusOneby[i].x--;
-				else
-					virusOneby[i].x++;
-			}
-			else if (x > 0 && y > 0) {
-				virusOneby[i].x--;
-				virusOneby[i].y--;
-			}
-			else if (x > 0 && y < 0) {
-				virusOneby[i].x--;
-				virusOneby[i].y++;
-			}
-			else if (x < 0 && y > 0) {
-				virusOneby[i].x++;
-				virusOneby[i].y--;
-			}
-			else {
-				virusOneby[i].x++;
-				virusOneby[i].y++;
-			}
-
-			RED
-				SetCurrentCursorPos(virusOneby[i].x, virusOneby[i].y);
-			printf("*");
-		}
-		vertical_num++;
-		WHITE
-	}
-}
-
-void trackingVirusVertical() {
-	if (trackingVirusVertical_flag == 0) {
-		if (virusVertical[0].x + 4 > GBOARD_WIDTH) {
-			for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
-				SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
-				printf(" ");
-			}
-			return;
-		}
-
-		for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
-			if (virusVertical[i].visible == 1) {
-				SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
-				printf(" ");
-
-				virusVertical[i].x++;
-
-				RED
-					SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
-				printf("*");
-			}
-		}
-		WHITE
-	}
+	getchar();
+	return 0;
 }
