@@ -1,4 +1,6 @@
 #include <windows.h>
+#include <process.h>
+#include <time.h>
 
 #define GBOARD_WIDTH 100
 #define GBOARD_HEIGHT 30
@@ -79,3 +81,5 @@ typedef struct LifeItem {
 	int pos_x;
 	int pos_y;
 }LifeItem;
+
+void ThreadTime();
