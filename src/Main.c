@@ -113,11 +113,6 @@ int main() {
 			trackingVirusVertical();
 		}
 
-		SetCurrentCursorPos(115, 10);
-		printf("%d %d", clockCurPosX, clockCurPosX);
-		SetCurrentCursorPos(115, 15);
-		printf("%d %d", lifeCurPosX, lifeCurPosX);
-
 		Sleep(100);
 		i++;
 		end_time = clock();
