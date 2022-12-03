@@ -16,6 +16,15 @@ int curTime;
 int v_num = 0;
 int vertical_num = 0;
 
+int clock_item_flag = 0;
+int phoenix_item_flag = 0;
+int trackingVirus_flag = 0;
+int trackingVirusOneby_flag = 0;
+int trackingVirusVertical_flag = 0;
+int clockCurPosX = 0, clockCurPosY = 0;
+int clock_item_time;
+int clock_item_time_plus_5sec;
+
 
 int main() {
 	int i, j, num_cnt = 0;
@@ -27,13 +36,13 @@ int main() {
 	removeCursor();
 	selectMode();
 	WHITE
-		start_time = clock();
+	start_time = clock();
 	createTime();
 	createLife();
 
 	createHuman();
 	createVirus();
-
+	
 	while (1) {
 		int i = 1;
 
@@ -95,6 +104,7 @@ int main() {
 		Sleep(100);
 		i++;
 		end_time = clock();
+		clock_item();
 		updateTime();
 	}
 
