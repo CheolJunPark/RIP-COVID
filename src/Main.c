@@ -3,9 +3,11 @@
 #include <math.h>
 #include "MyHeader.h"
 
-extern start_time;
-extern end_time;
+clock_t start_time;
+clock_t end_time;
+extern curtime;
 
+int game_over_flag = 0;
 int curPosX, curPosY;
 int humanCurPosX = 50, humanCurPosY = 15;
 int virusCurPosX, virusCurPosY;
@@ -42,11 +44,12 @@ int main() {
 	int vertical_cnt = 0;
 	int circle_cnt = 0;
 
-	system("mode con:cols=130 lines=30");   // cols: ê°€ë¡œ, lines: ì„¸ë¡œ
+	system("mode con:cols=130 lines=30");   // cols: °¡·Î, lines: ¼¼·Î
 	removeCursor();
 	selectMode();
+	_beginthreadex(NULL, 0, ThreadTime, 0, 0, NULL);
 	WHITE
-		start_time = clock();
+	start_time = clock();
 	createTime();
 	createLife();
 
@@ -82,16 +85,15 @@ int main() {
 				game_util.life = --game_util.life;
 				updateLife();
 				SetCurrentCursorPos(humanCurPosX, humanCurPosY);
-				RED printf("âˆ©\a");
+				RED printf("¡û\a");
 			}
 
 			if (game_util.life == 0) {
+				game_over_flag = 1;
 				GameOver();
 				break;
 			}
-			Sleep(500);
-			updateTime();
-			Sleep(500);
+			Sleep(700);
 		}
 
 		if (check == 2) {
@@ -119,7 +121,6 @@ int main() {
 		clock_item();
 		phoenix_item();
 		life_item();
-		updateTime();
 	}
 
 	getchar();
