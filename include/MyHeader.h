@@ -1,6 +1,5 @@
 #include <windows.h>
-#include <process.h>
-#include <time.h>
+
 
 #define GBOARD_WIDTH 100
 #define GBOARD_HEIGHT 30
@@ -100,7 +99,7 @@ typedef struct visibleMap {
 	int y;
 }VisibleMap;
 
-Virus* virus;
+Virus *virus;
 VirusOneby virusOneby[100];
 VirusVertical virusVertical[GBOARD_HEIGHT];
 VirusCircle virusCircle[100];
@@ -141,5 +140,3 @@ typedef struct LifeItem {
 }LifeItem;
 
 
-
-unsigned __stdcall ThreadTime(void);
