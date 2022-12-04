@@ -3,6 +3,7 @@
 
 extern humanCurPosX, humanCurPosY;
 extern v_num;
+extern killed_v;
 
 //인간 생성
 void createHuman() {
@@ -14,11 +15,13 @@ void createHuman() {
 void createVirus() {
 
 	RED
-		virus = (Virus*)malloc(100 * sizeof(Virus));
+		virus = (Virus*)malloc(5 * sizeof(Virus));
 
 	srand((unsigned int)time(NULL));
 
 	for (int i = 0; i < 5; i++) {
+		virus[i].killed_flag = 0;
+
 		virus[i].x = rand() % 97 + 1;
 		virus[i].y = rand() % 28 + 1;
 		SetCurrentCursorPos(virus[i].x, virus[i].y);
@@ -26,11 +29,22 @@ void createVirus() {
 	}
 	WHITE
 }
+//점수 생성
+void createScore() {
+
+
+	game_util.score = killed_v * 50;
+
+	SetCurrentCursorPos(GBOARD_WIDTH, GBOARD_HEIGHT - 20);
+	printf("score : %d", game_util.score);
+}
 
 void createVirusOneby() {
 
 	RED
 		srand((unsigned int)time(NULL));
+
+	virusOneby[v_num].killed_flag = 0;
 
 	virusOneby[v_num].x = rand() % 97 + 1;
 	virusOneby[v_num].y = rand() % 28 + 1;
@@ -51,6 +65,9 @@ void createVirusVertical() {
 		r[i] = rand() % 30;
 
 	for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
+
+		virusVertical[i].killed_flag = 0;
+
 		int flag = 0;
 		for (int j = 0; j < 4; j++) {
 			if (r[j] == i) {
@@ -67,11 +84,28 @@ void createVirusVertical() {
 		virusVertical[i].x = 2;
 		virusVertical[i].y = 1 + i;
 
+		virusVertical[i].onoff = 0;
+
 		SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
 		printf("*");
 		virusVertical[i].visible = 1;
 	}
 	WHITE
+}
+
+void createVirusHorizontal() {
+
+
+	for (int i = 0; i < GBOARD_WIDTH - 4; i++) {
+		virusHorizontal[i].x = 2 + i;
+		virusHorizontal[i].y = 28;
+
+		SetCurrentCursorPos(virusHorizontal[i].x, virusHorizontal[i].y);
+		printf("*");
+
+
+
+	}
 }
 
 void createVirusSquare() {
