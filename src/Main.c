@@ -3,10 +3,11 @@
 #include <math.h>
 #include "MyHeader.h"
 
-clock_t start_time;
-clock_t end_time;
-extern curtime;
+extern start_time;
+extern end_time;
 
+
+int preX = 999, preY = 999;
 int game_over_flag = 0;
 int curPosX, curPosY;
 int humanCurPosX = 50, humanCurPosY = 15;
@@ -17,6 +18,10 @@ int curTime;
 
 int v_num = 0;
 int vertical_num = 0;
+int boom_flag = 0;
+int spear_flag = 0;
+int killed_v = 0;
+
 
 int clock_item_flag = 0;
 int phoenix_item_flag = 0;
@@ -39,6 +44,11 @@ int lifeCurPosX = 0, lifeCurPosY = 0;
 
 
 int main() {
+
+	game_util.score = 0;
+	boom_xy.get_check = 0;
+	spear_xy.get_check = 0;
+
 	int i, j, num_cnt = 0;
 	int check = 0;
 	int vertical_cnt = 0;
@@ -47,11 +57,12 @@ int main() {
 	system("mode con:cols=130 lines=30");   // cols: 가로, lines: 세로
 	removeCursor();
 	selectMode();
-	_beginthreadex(NULL, 0, ThreadTime, 0, 0, NULL);
 	WHITE
-	start_time = clock();
+		start_time = clock();
 	createTime();
 	createLife();
+	
+	createScore();
 
 	createHuman();
 	createVirus();
@@ -93,7 +104,10 @@ int main() {
 				GameOver();
 				break;
 			}
-			Sleep(700);
+			Sleep(50);
+			updateTime();
+			Sleep(50);
+
 		}
 
 		if (check == 2) {
@@ -105,6 +119,7 @@ int main() {
 		}
 
 		if (vertical_num == 10) {
+			//createVirusHorizontal();
 			createVirusVertical();
 			//createVirusCircle();
 			//createVirusSquare();
@@ -113,14 +128,26 @@ int main() {
 
 		if (vertical_cnt >= 1) {
 			trackingVirusVertical();
+			//trackingVirusHorizontal();
 		}
 
 		Sleep(100);
 		i++;
 		end_time = clock();
+		updateTime();
+
 		clock_item();
 		phoenix_item();
 		life_item();
+
+		boom_item();
+		spear_item();
+
+
+
+		if (spear_xy.get_check == 1) {
+			spear_wear();
+		}
 	}
 
 	getchar();
