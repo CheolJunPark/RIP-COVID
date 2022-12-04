@@ -77,8 +77,11 @@ int DetectCollision(int posX, int posY) {
 
 //추적 바이러스
 void trackingVirus() {
-	if (trackingVirus_flag == 0) {
-		for (int i = 0; i < 5; i++) {
+
+	for (int i = 0; i < 5; i++) {
+
+		if (virus[i].killed_flag == 0) {
+
 			SetCurrentCursorPos(virus[i].x, virus[i].y);
 			printf(" ");
 
@@ -126,8 +129,10 @@ void trackingVirus() {
 }
 
 void trackingVirusOneby() {
-	if (trackingVirusOneby_flag == 0) {
-		for (int i = 0; i < v_num; i++) {
+
+	for (int i = 0; i < v_num; i++) {
+
+		if (virusOneby[i].killed_flag == 0) {
 			SetCurrentCursorPos(virusOneby[i].x, virusOneby[i].y);
 			printf(" ");
 
@@ -188,30 +193,50 @@ void trackingVirusVertical() {
 		}
 
 		for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
-			if (virusVertical[i].visible == 1) {
-				SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
-				printf(" ");
-
-				virusVertical[i].x++;
-
-
-				if (virusVertical[i].x == 97) {
-					for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
-						SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
-						printf(" ");
-						virusVertical[i].x = 999; virusVertical[i].y = 999;
-					}
-					virusVertical[0].onoff = 1;
-					break;
-				}
-
-
-
-				RED
+			if (virusVertical[i].killed_flag == 0) {
+				if (virusVertical[i].visible == 1) {
 					SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
-				printf("*");
+					printf(" ");
+
+					virusVertical[i].x++;
+
+
+					if (virusVertical[i].x == 97) {
+						for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
+							SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
+							printf(" ");
+							virusVertical[i].x = 999; virusVertical[i].y = 999;
+						}
+						virusVertical[0].onoff = 1;
+						break;
+					}
+
+
+
+					RED
+						SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
+					printf("*");
+				}
 			}
 		}
 		WHITE
 	}
+}
+void trackingVirusHorizontal() {
+
+	for (int i = 0; i < GBOARD_WIDTH - 4; i++) {
+
+		SetCurrentCursorPos(virusHorizontal[i].x, virusHorizontal[i].y);
+		printf(" ");
+
+
+		virusHorizontal[i].y--;
+
+		SetCurrentCursorPos(virusHorizontal[i].x, virusHorizontal[i].y);
+		printf("*");
+
+
+
+	}
+
 }
