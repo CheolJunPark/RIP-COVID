@@ -30,17 +30,21 @@
 typedef struct Virus {
 	int x;
 	int y;
+	int killed_flag;
 }Virus;
 
 typedef struct VirusOneby {
 	int x;
 	int y;
+	int killed_flag;
 }VirusOneby;
 
 typedef struct VirusVertical {
 	int x;
 	int y;
 	int visible;
+	int onoff;
+	int killed_flag;
 }VirusVertical;
 
 typedef struct VirusCircle {
@@ -53,11 +57,65 @@ typedef struct VirusSquare {
 	int y;
 }VirusSquare;
 
+typedef struct VirusHorizontal {
+	int x;
+	int y;
+}VirusHorizontal;
+
+typedef struct boom_xy {
+	int x;
+	int y;
+	int get_check;
+
+}Boom_xy;
+
+typedef struct boom_ready {
+	int x;
+	int y;
+}Boom_ready;
+
+typedef struct spear_xy {
+	int x;
+	int y;
+	int get_check;
+}Spear_xy;
+
+typedef struct spear_ready {
+	int x;
+	int y;
+}Spear_ready;
+
+typedef struct PreEraser {
+	int x;
+	int y;
+}PreEraser;
+
+typedef struct invisibleMap {
+	int x;
+	int y;
+}InvisibleMap;
+
+typedef struct visibleMap {
+	int x;
+	int y;
+}VisibleMap;
+
 Virus* virus;
 VirusOneby virusOneby[100];
 VirusVertical virusVertical[GBOARD_HEIGHT];
 VirusCircle virusCircle[100];
 VirusSquare virusSquare[200];
+VirusHorizontal virusHorizontal[GBOARD_WIDTH];
+
+Boom_xy boom_xy;
+Boom_ready boom_ready[100];
+
+Spear_xy spear_xy;
+Spear_ready spear_ready[9];
+PreEraser preEraser[9];
+
+InvisibleMap invisibleMap[3000];
+VisibleMap visibleMap[100];
 
 struct game_util {
 	int score;
@@ -81,5 +139,7 @@ typedef struct LifeItem {
 	int pos_x;
 	int pos_y;
 }LifeItem;
+
+
 
 unsigned __stdcall ThreadTime(void);
