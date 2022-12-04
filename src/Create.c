@@ -14,7 +14,7 @@ void createHuman() {
 void createVirus() {
 
 	RED
-		virus = (Virus*)malloc(5 * sizeof(Virus));
+		virus = (Virus*)malloc(100 * sizeof(Virus));
 
 	srand((unsigned int)time(NULL));
 
