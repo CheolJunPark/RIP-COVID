@@ -22,6 +22,12 @@ extern phoenix_item_time_plus_5sec;
 
 extern lifeCurPosX, lifeCurPosY;
 
+extern preX, preY;
+extern boom_flag;
+extern spear_flag;
+extern killed_v;
+extern v_num;
+
 
 void clock_item() {
 	ClockItem clock;
@@ -146,12 +152,286 @@ void life_item() {
 	if (humanCurPosX == lifeCurPosX && humanCurPosY == lifeCurPosY)
 	{
 		life_item_flag = 0;
-		
+
 		if (game_util.life < 5)
 			game_util.life += 1;
 		updateLife();
-	
+
 	}
 
 
+}
+
+//spear 잔상 제거
+void pre_remove() {
+	int x, y, k;
+	int i = 0, j = 0;
+
+	x = preX - 2;
+	y = preY - 1;
+
+	for (k = 0; k < 9; k++) {
+		spear_ready[k].x = x + i * 2;
+		i++;
+		spear_ready[k].y = y + j;
+
+		if (i % 3 == 0) {
+			j++;
+			i = 0;
+		}
+
+	}
+
+
+	SetCurrentCursorPos(spear_ready[1].x, spear_ready[1].y);
+	printf("  ");
+	SetCurrentCursorPos(spear_ready[3].x, spear_ready[3].y);
+	printf("  ");
+	SetCurrentCursorPos(spear_ready[5].x, spear_ready[5].y);
+	printf("  ");
+	SetCurrentCursorPos(spear_ready[7].x, spear_ready[7].y);
+	printf("  ");
+	SetCurrentCursorPos(spear_ready[4].x, spear_ready[4].y);
+	printf(" ");
+
+}
+
+// 창 아이템 착용
+void spear_wear() {
+
+	int x, y, k;
+	int i = 0, j = 0;
+	int a, b, c, d;
+
+	x = humanCurPosX - 2;
+	y = humanCurPosY - 1;
+
+	pre_remove();
+
+	for (k = 0; k < 9; k++) {
+		spear_ready[k].x = x + i * 2;
+		i++;
+		spear_ready[k].y = y + j;
+
+		if (i % 3 == 0) {
+			j++;
+			i = 0;
+		}
+
+	}
+
+
+
+
+	SetCurrentCursorPos(spear_ready[1].x, spear_ready[1].y);
+	printf("▲");
+	SetCurrentCursorPos(spear_ready[3].x, spear_ready[3].y);
+	printf("◀");
+	SetCurrentCursorPos(spear_ready[5].x, spear_ready[5].y);
+	printf("▶");
+	SetCurrentCursorPos(spear_ready[7].x, spear_ready[7].y);
+	printf("▼");
+	SetCurrentCursorPos(spear_ready[4].x, spear_ready[4].y);
+	printf("@");
+
+	for (k = 0; k < 9; k++) {
+		for (a = 0; a < 5; a++) {
+			if (spear_ready[0].x <= virus[a].x && spear_ready[0].y <= virus[a].y &&
+				spear_ready[2].x >= virus[a].x && spear_ready[2].y <= virus[a].y &&
+				spear_ready[6].x <= virus[a].x && spear_ready[6].y >= virus[a].y &&
+				spear_ready[8].x >= virus[a].x && spear_ready[8].y >= virus[a].y) {
+				//SetCurrentCursorPos(virus[a].x, virus[a].y);
+				//printf(" ");
+				virus[a].x = 1000;
+				virus[a].y = 1000;
+				virus[a].killed_flag = 1;
+				killed_v++;
+				createScore();
+			}
+		}
+		for (b = 0; b < v_num; b++) {
+			if (spear_ready[0].x <= virusOneby[b].x && spear_ready[0].y <= virusOneby[b].y &&
+				spear_ready[2].x >= virusOneby[b].x && spear_ready[2].y <= virusOneby[b].y &&
+				spear_ready[6].x <= virusOneby[b].x && spear_ready[6].y >= virusOneby[b].y &&
+				spear_ready[8].x >= virusOneby[b].x && spear_ready[8].y >= virusOneby[b].y) {
+				//SetCurrentCursorPos(virusOneby[b].x, virusOneby[b].y);
+				//printf(" ");
+				virusOneby[b].x = 1000;
+				virusOneby[b].y = 1000;
+				virusOneby[b].killed_flag = 1;
+				killed_v++;
+				createScore();
+			}
+		}
+		for (c = 0; c < 30; c++) {
+			if (spear_ready[0].x <= virusVertical[c].x && spear_ready[0].y <= virusVertical[c].y &&
+				spear_ready[2].x >= virusVertical[c].x && spear_ready[2].y <= virusVertical[c].y &&
+				spear_ready[6].x <= virusVertical[c].x && spear_ready[6].y >= virusVertical[c].y &&
+				spear_ready[8].x >= virusVertical[c].x && spear_ready[8].y >= virusVertical[c].y) {
+				//SetCurrentCursorPos(virusVertical[c].x, virusVertical[c].y);
+				//printf(" ");
+				virusVertical[c].x = 1000;
+				virusVertical[c].y = 1000;
+				virusVertical[c].killed_flag = 1;
+				killed_v++;
+				createScore();
+			}
+		}
+	}
+
+
+
+	preX = humanCurPosX;
+	preY = humanCurPosY;
+
+
+}
+
+//창 좌표
+void spear_item() {
+	if (spear_xy.get_check == 0) {
+
+		srand((unsigned int)time(NULL));
+
+		if (spear_flag == 0) {
+			spear_xy.x = 40;
+			spear_xy.y = 15;
+			spear_flag = 1;
+		}
+
+		SetCurrentCursorPos(spear_xy.x, spear_xy.y);
+		printf("S");
+
+		if (spear_xy.x == humanCurPosX && spear_xy.y == humanCurPosY) {
+			spear_xy.get_check = 1;
+
+
+			spear_wear();
+
+		}
+
+	}
+}
+
+// 폭탄 폭발
+void boom_shoot() {
+
+	int x, y;
+	int i = 1, j = 0;
+	int k = 1;
+	int a, b, c, d;
+
+	x = boom_xy.x - 8;
+	y = boom_xy.y - 2;
+
+	for (k = 0; k < 36; k++) {
+
+
+		boom_ready[k].x = x + i * 2;
+		boom_ready[k].y = y + j;
+
+		i++;
+
+		if (i % 7 == 0) {
+			j++;
+			i = 1;
+		}
+	}
+
+
+	for (k = 0; k < 36; k++) {
+
+		SetCurrentCursorPos(boom_ready[k].x, boom_ready[k].y);
+		printf("■");
+
+	}
+	Sleep(300);
+
+	for (k = 0; k < 36; k++) {
+
+		for (a = 0; a < 5; a++) {
+			if (boom_ready[0].x <= virus[a].x && boom_ready[0].y <= virus[a].y &&
+				boom_ready[5].x >= virus[a].x && boom_ready[5].y <= virus[a].y &&
+				boom_ready[30].x <= virus[a].x && boom_ready[30].y >= virus[a].y &&
+				boom_ready[35].x >= virus[a].x && boom_ready[35].y >= virus[a].y) {
+				virus[a].x = 1000;
+				virus[a].y = 1000;
+				virus[a].killed_flag = 1;
+				killed_v++;
+				createScore();
+			}
+		}
+
+		for (b = 0; b < v_num; b++) {
+			if (boom_ready[0].x <= virusOneby[b].x && boom_ready[0].y <= virusOneby[b].y &&
+				boom_ready[5].x >= virusOneby[b].x && boom_ready[5].y <= virusOneby[b].y &&
+				boom_ready[30].x <= virusOneby[b].x && boom_ready[30].y >= virusOneby[b].y &&
+				boom_ready[35].x >= virusOneby[b].x && boom_ready[35].y >= virusOneby[b].y) {
+				virusOneby[b].x = 1000;
+				virusOneby[b].y = 1000;
+				virusOneby[b].killed_flag = 1;
+				killed_v++;
+				createScore();
+			}
+		}
+
+		for (c = 0; c < 30; c++) {
+			if (boom_ready[0].x <= virusVertical[c].x && boom_ready[0].y <= virusVertical[c].y &&
+				boom_ready[5].x >= virusVertical[c].x && boom_ready[5].y <= virusVertical[c].y &&
+				boom_ready[30].x <= virusVertical[c].x && boom_ready[30].y >= virusVertical[c].y &&
+				boom_ready[35].x >= virusVertical[c].x && boom_ready[35].y >= virusVertical[c].y) {
+				virusVertical[c].x = 1000;
+				virusVertical[c].y = 1000;
+				virusVertical[c].killed_flag = 1;
+				killed_v++;
+				createScore();
+			}
+		}
+
+	}
+
+
+
+	for (k = 0; k < 36; k++) {
+
+		SetCurrentCursorPos(boom_ready[k].x, boom_ready[k].y);
+		printf("  ");
+
+	}
+
+	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
+	printf("@");
+
+	Sleep(30);
+
+
+
+}
+//폭탄 좌표
+void boom_item() {
+
+	if (boom_xy.get_check == 0) {
+
+		srand((unsigned int)time(NULL));
+
+		if (boom_flag == 0) {
+			boom_xy.x = 60;
+			boom_xy.y = 15;
+			boom_flag = 1;
+		}
+
+		SetCurrentCursorPos(boom_xy.x, boom_xy.y);
+		printf("X");
+
+
+		if (boom_xy.x == humanCurPosX && boom_xy.y == humanCurPosY) {
+			boom_xy.get_check = 1;
+			SetCurrentCursorPos(boom_xy.x, boom_xy.y);
+			printf(" ");
+
+			boom_shoot();
+
+		}
+
+	}
 }
