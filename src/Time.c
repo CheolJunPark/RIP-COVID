@@ -3,7 +3,7 @@
 int curtime;
 extern game_over_flag;
 
-void ThreadTime() {
+unsigned __stdcall ThreadTime(void) {
 	int min = 0;
 	int sec = 0;
 	while (1)
