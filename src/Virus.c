@@ -176,7 +176,9 @@ void trackingVirusOneby() {
 }
 
 void trackingVirusVertical() {
-	if (trackingVirusVertical_flag == 0) {
+
+	if (virusVertical[0].onoff == 0) {
+
 		if (virusVertical[0].x + 4 > GBOARD_WIDTH) {
 			for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
 				SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
@@ -191,6 +193,19 @@ void trackingVirusVertical() {
 				printf(" ");
 
 				virusVertical[i].x++;
+
+
+				if (virusVertical[i].x == 97) {
+					for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
+						SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
+						printf(" ");
+						virusVertical[i].x = 999; virusVertical[i].y = 999;
+					}
+					virusVertical[0].onoff = 1;
+					break;
+				}
+
+
 
 				RED
 					SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
