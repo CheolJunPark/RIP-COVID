@@ -43,7 +43,7 @@ void ThreadTime() {
 	}
 }
 
-//½Ã°£ »ı¼º
+//ì‹œê°„ ìƒì„±
 void createTime() {
 	drawRect(101, 0, 27, 3);
 	SetCurrentCursorPos(110, 1);
