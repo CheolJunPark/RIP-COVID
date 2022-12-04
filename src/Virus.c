@@ -201,7 +201,7 @@ void trackingVirusVertical() {
 					virusVertical[i].x++;
 
 
-					if (virusVertical[i].x == 97) {
+					if (virusVertical[i].x == 95) {
 						for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
 							SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
 							printf(" ");
