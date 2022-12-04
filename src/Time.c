@@ -1,51 +1,28 @@
-#include "MyHeader.h"
+#include <time.h>
 
-int curtime;
-extern game_over_flag;
+clock_t start_time;
+clock_t end_time;
 
-unsigned __stdcall ThreadTime(void) {
-	int min = 0;
-	int sec = 0;
-	while (1)
-	{
-		if (game_over_flag == 1) 
-			break;
-		
-		Sleep(1000);
-		curtime += 1;
 
-		if (game_over_flag == 1)
-			break;
+//시간 업데이트
+void updateTime() {
+	SetCurrentCursorPos(110, 1);
+	int min = (int)(end_time - start_time) / CLOCKS_PER_SEC / 60;
+	int sec = (int)(end_time - start_time) / CLOCKS_PER_SEC % 60;
 
-		min = sec / 60;
-		sec = curtime % 60;
-		if (min < 10 && sec < 10) {
-			WHITE
-			SetCurrentCursorPos(110, 1);
-			printf("0%d  :  0%d", min, sec);
-		}
+	if (min < 10 && sec < 10)
+		printf("0%d  :  0%d", min, sec);
 
-		else if (min < 10 && sec >= 10) {
-			WHITE
-			SetCurrentCursorPos(110, 1);
-			printf("0%d  :  %d", min, sec);
-		}
-		else if (min >= 10 && sec < 10) {
-			WHITE
-			SetCurrentCursorPos(110, 1);
-			printf("%d  :  0%d", min, sec);
-		}
-		else {
-			WHITE
-			SetCurrentCursorPos(110, 1);
-			printf("%d  :  %d", min, sec);
-		}
-	}
+	else if (min < 10 && sec >= 10)
+		printf("0%d  :  %d", min, sec);
+
+	else if (min >= 10 && sec < 10)
+		printf("%d  :  0%d", min, sec);
+
+	else
+		printf("%d  :  %d", min, sec);
 }
-
 //시간 생성
 void createTime() {
 	drawRect(101, 0, 27, 3);
-	SetCurrentCursorPos(110, 1);
-	printf("00  :  00");
 }
