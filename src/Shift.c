@@ -21,8 +21,8 @@ void ShiftRight(void) {
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf("@");
 
-	//if (spear_xy.get_check == 1)
-	//	spear_wear();
+	if (spear_xy.get_check == 1)
+		spear_wear();
 
 }
 
