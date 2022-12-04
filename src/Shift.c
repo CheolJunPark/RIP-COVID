@@ -1,5 +1,14 @@
+#include "MyHeader.h"
+
 extern humanCurPosX;
 extern humanCurPosY;
+
+extern preX, preY;
+extern boom_flag;
+extern spear_flag;
+extern killed_v;
+extern v_num;
+
 
 
 void ShiftRight(void) {
@@ -12,6 +21,9 @@ void ShiftRight(void) {
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf("@");
 
+	//if (spear_xy.get_check == 1)
+	//	spear_wear();
+
 }
 
 void ShiftLeft(void) {
@@ -23,6 +35,10 @@ void ShiftLeft(void) {
 	humanCurPosX -= 1;
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf("@");
+
+	if (spear_xy.get_check == 1)
+		spear_wear();
+
 }
 
 void ShiftUp(void) {
@@ -34,6 +50,10 @@ void ShiftUp(void) {
 	humanCurPosY -= 1;
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf("@");
+
+	if (spear_xy.get_check == 1)
+		spear_wear();
+
 }
 
 void ShiftDown(void) {
@@ -45,4 +65,8 @@ void ShiftDown(void) {
 	humanCurPosY += 1;
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf("@");
+
+	if (spear_xy.get_check == 1)
+		spear_wear();
+
 }
