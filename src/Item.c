@@ -221,7 +221,14 @@ void spear_wear() {
 	}
 
 
-
+	SetCurrentCursorPos(spear_ready[0].x, spear_ready[0].y);
+	printf(" ");
+	SetCurrentCursorPos(spear_ready[2].x, spear_ready[2].y);
+	printf(" ");
+	SetCurrentCursorPos(spear_ready[6].x, spear_ready[6].y);
+	printf(" ");
+	SetCurrentCursorPos(spear_ready[8].x, spear_ready[8].y);
+	printf(" ");
 
 	SetCurrentCursorPos(spear_ready[1].x, spear_ready[1].y);
 	printf("▲");
