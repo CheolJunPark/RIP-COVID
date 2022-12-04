@@ -82,4 +82,4 @@ typedef struct LifeItem {
 	int pos_y;
 }LifeItem;
 
-void ThreadTime();
+unsigned __stdcall ThreadTime(void);
