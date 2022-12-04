@@ -44,7 +44,7 @@ int main() {
 	int vertical_cnt = 0;
 	int circle_cnt = 0;
 
-	system("mode con:cols=130 lines=30");   // cols: °¡·Î, lines: ¼¼·Î
+	system("mode con:cols=130 lines=30");   // cols: ê°€ë¡œ, lines: ì„¸ë¡œ
 	removeCursor();
 	selectMode();
 	_beginthreadex(NULL, 0, ThreadTime, 0, 0, NULL);
@@ -85,7 +85,7 @@ int main() {
 				game_util.life = --game_util.life;
 				updateLife();
 				SetCurrentCursorPos(humanCurPosX, humanCurPosY);
-				RED printf("¡û\a");
+				RED printf("âˆ©\a");
 			}
 
 			if (game_util.life == 0) {
