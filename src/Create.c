@@ -1,19 +1,14 @@
 #include "MyHeader.h"
-#include <stdlib.h>
 
-extern humanCurPosX, humanCurPosY;
-extern v_num;
-extern killed_v;
-
-//인간 생성
+// 인간 생성
 void createHuman() {
 
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf("@");
 }
-//바이러스 생성
-void createVirus() {
 
+// 바이러스 생성
+void createVirus() {
 	RED
 		virus = (Virus*)malloc(5 * sizeof(Virus));
 
@@ -29,18 +24,8 @@ void createVirus() {
 	}
 	WHITE
 }
-//점수 생성
-void createScore() {
-
-
-	game_util.score = killed_v * 50;
-
-	SetCurrentCursorPos(GBOARD_WIDTH, GBOARD_HEIGHT - 20);
-	printf("score : %d", game_util.score);
-}
 
 void createVirusOneby() {
-
 	RED
 		srand((unsigned int)time(NULL));
 
@@ -94,22 +79,16 @@ void createVirusVertical() {
 }
 
 void createVirusHorizontal() {
-
-
 	for (int i = 0; i < GBOARD_WIDTH - 4; i++) {
 		virusHorizontal[i].x = 2 + i;
 		virusHorizontal[i].y = 28;
 
 		SetCurrentCursorPos(virusHorizontal[i].x, virusHorizontal[i].y);
 		printf("*");
-
-
-
 	}
 }
 
 void createVirusSquare() {
-
 	int i, k = 0;
 
 	for (i = 0; i < 18; i++) {
@@ -172,4 +151,14 @@ void createVirusSquare() {
 		SetCurrentCursorPos(virusSquare[i].x, virusSquare[i].y);
 		printf("*");
 	}
+}
+
+// 점수 생성
+void createScore() {
+	drawRect(101, 8, 27, 3);
+	game_util.score = killed_v * 50;
+
+	//SetCurrentCursorPos(GBOARD_WIDTH, GBOARD_HEIGHT - 20);
+	SetCurrentCursorPos(110, 9);
+	printf("score : %d", game_util.score);
 }
