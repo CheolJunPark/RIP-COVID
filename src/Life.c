@@ -1,7 +1,6 @@
 #include "MyHeader.h"
 
-
-//목숨 업데이트
+// 목숨 업데이트
 void updateLife() {
 
 	SetCurrentCursorPos(104, 5);
@@ -14,7 +13,8 @@ void updateLife() {
 	}
 	WHITE
 }
-//목숨 생성
+
+// 목숨 생성
 void createLife() {
 
 	drawRect(101, 4, 27, 3);
