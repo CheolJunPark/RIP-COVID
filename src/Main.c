@@ -34,13 +34,16 @@ int phoenix_item_flag = 0;
 int lifeCurPosX = 0, lifeCurPosY = 0;
 int life_item_flag = 0;
 
-// 게임 오버 플래그
-int game_over_flag = 0;
-
 // 창 아이템
 int spear_item_time;
 int spear_item_time_plus_5sec;
 int spear_clock_flag = 0;
+
+// 게임 오버 플래그
+int game_over_flag = 0;
+
+// 아이템 먹은 횟수
+int cnt_eat_item = 0;
 
 // 주석 필요
 int preX = 999, preY = 999;
@@ -52,7 +55,6 @@ int vertical_num = 0;
 int boom_flag = 0;
 int spear_flag = 0;
 int killed_v = 0;
-
 
 int main() {
 	game_util.score = 0;
@@ -88,15 +90,12 @@ int main() {
 		if (_kbhit())
 			moveHuman();
 
-		if (i % 100 == 0) {
+		if (i % 100 == 0) 
 			num_cnt++;
-		}
 
 		for (j = 0; j <= num_cnt; j++)
-		{
 			createVirusOneby();
-		}
-
+		
 		trackingVirus();
 		trackingVirusOneby();
 
@@ -114,12 +113,11 @@ int main() {
 				GameOver();
 				break;
 			}
-			Sleep(50);
+			Sleep(500);
 			updateTime();
-			Sleep(50);
+			Sleep(500);
 
 		}
-
 		if (check == 2) {
 			WHITE
 				SetCurrentCursorPos(humanCurPosX, humanCurPosY);
@@ -146,11 +144,15 @@ int main() {
 		end_time = clock();
 		updateTime();
 
+		// 아이템
 		clock_item();
 		phoenix_item();
 		life_item();
 		boom_item();
 		spear_item();
+
+		// 점수 업데이트
+		createScore();
 
 		if (spear_xy.get_check == 1) {
 			spear_wear();
