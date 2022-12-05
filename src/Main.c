@@ -1,50 +1,54 @@
-#include <stdio.h>
-#include <conio.h>
-#include <math.h>
 #include "MyHeader.h"
 
-extern start_time;
-extern end_time;
-
-
-int preX = 999, preY = 999;
-int game_over_flag = 0;
-int curPosX, curPosY;
+// 인간 위치
 int humanCurPosX = 50, humanCurPosY = 15;
+
+// 바이러스 위치
 int virusCurPosX, virusCurPosY;
+
+// 모드
 int mode;
+
+// 시간
+clock_t start_time;
+clock_t end_time;
+
+// 시계 아이템
+int clockCurPosX = 0, clockCurPosY = 0;
+int clock_item_time;
+int clock_item_time_plus_5sec;
+int clock_item_flag = 0;
+
+// 추적 바이러스 플래그
+int trackingVirus_flag = 0;
+int trackingVirusOneby_flag = 0;
+int trackingVirusVertical_flag = 0;
+
+// 무적 아이템
+int phoenixCurPosX = 0, phoenixCurPosY = 0;
+int phoenix_item_time;
+int phoenix_item_time_plus_5sec;
+int phoenix_item_flag = 0;
+
+// 생명 아이템
+int lifeCurPosX = 0, lifeCurPosY = 0;
+int life_item_flag = 0;
+
+// 게임 오버 플래그
+int game_over_flag = 0;
+
+// 주석 필요
+int preX = 999, preY = 999;
+int curPosX, curPosY;
 int next = 0;
 int curTime;
-
 int v_num = 0;
 int vertical_num = 0;
 int boom_flag = 0;
 int spear_flag = 0;
 int killed_v = 0;
 
-
-int clock_item_flag = 0;
-int phoenix_item_flag = 0;
-int life_item_flag = 0;
-
-int trackingVirus_flag = 0;
-int trackingVirusOneby_flag = 0;
-int trackingVirusVertical_flag = 0;
-
-int clockCurPosX = 0, clockCurPosY = 0;
-int clock_item_time;
-int clock_item_time_plus_5sec;
-
-
-int phoenixCurPosX = 0, phoenixCurPosY = 0;
-int phoenix_item_time;
-int phoenix_item_time_plus_5sec;
-
-int lifeCurPosX = 0, lifeCurPosY = 0;
-
-
 int main() {
-
 	game_util.score = 0;
 	boom_xy.get_check = 0;
 	spear_xy.get_check = 0;
@@ -61,7 +65,7 @@ int main() {
 		start_time = clock();
 	createTime();
 	createLife();
-	
+
 	createScore();
 
 	createHuman();
@@ -139,11 +143,8 @@ int main() {
 		clock_item();
 		phoenix_item();
 		life_item();
-
 		boom_item();
 		spear_item();
-
-
 
 		if (spear_xy.get_check == 1) {
 			spear_wear();
@@ -151,5 +152,6 @@ int main() {
 	}
 
 	getchar();
+
 	return 0;
 }
