@@ -3,9 +3,8 @@
 //인간 이동
 void moveHuman() {
 	int key;
-
-	for (int i = 0; i < 100; i++) {
-		if (_kbhit() != 0) {
+	for (int i = 0; i < 100; i++)
+		if (_kbhit() != 0) 
 			key = _getch();
 			switch (key) {
 			case LEFT:
@@ -21,6 +20,4 @@ void moveHuman() {
 				ShiftDown();
 				break;
 			}
-		}
-	}
 }
