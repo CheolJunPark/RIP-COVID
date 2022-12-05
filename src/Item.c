@@ -423,7 +423,8 @@ void boom_shoot() {
 	Sleep(30);
 
 
-
+	boom_xy.get_check = 0;
+	boom_flag = 0;
 }
 //폭탄 좌표
 void boom_item() {
