@@ -155,10 +155,20 @@ void createVirusSquare() {
 
 // 점수 생성
 void createScore() {
-	drawRect(101, 8, 27, 3);
-	game_util.score = killed_v * 50;
+	int min = (int)(end_time - start_time) / CLOCKS_PER_SEC / 60;
+	int sec = (int)(end_time - start_time) / CLOCKS_PER_SEC % 60;
 
-	//SetCurrentCursorPos(GBOARD_WIDTH, GBOARD_HEIGHT - 20);
+	drawRect(101, 8, 27, 3);
+
+	// 바이러스 죽인 숫자 당 50점 획득
+	game_util.score = killed_v * 50;
+	// 아이템 먹은 횟수 당 100점 획득
+	game_util.score += cnt_eat_item * 100;
+	// 1분당 500점 획득
+	game_util.score += min * 500;
+	// 1초당 10점 획득
+	game_util.score += sec * 10;
+
 	SetCurrentCursorPos(110, 9);
 	printf("score : %d", game_util.score);
 }
