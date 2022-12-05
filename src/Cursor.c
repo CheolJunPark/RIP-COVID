@@ -1,4 +1,4 @@
-#include <windows.h>
+#include "MyHeader.h"
 
 void SetCurrentCursorPos(int x, int y)
 {
