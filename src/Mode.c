@@ -46,7 +46,7 @@ void selectMode() {
 	int key;
 
 	drawRect(0, 0, GBOARD_WIDTH, GBOARD_HEIGHT);
-	printTitle1();
+	printTitle();
 
 	while (1) {
 		if (_kbhit() != 0) {
