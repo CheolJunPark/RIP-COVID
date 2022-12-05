@@ -60,12 +60,12 @@ int main() {
 
 	system("mode con:cols=130 lines=30");   // cols: 가로, lines: 세로
 	removeCursor();
-	selectMode();
+	printTitle();
 	WHITE
 		start_time = clock();
 	createTime();
 	createLife();
-
+	drawItemBoard();
 	createScore();
 
 	createHuman();
