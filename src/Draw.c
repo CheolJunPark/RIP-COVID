@@ -88,8 +88,11 @@ void printTitle2() {
 }
 
 // "RIP COVID" 출력
-void printTitle1() {
+void printTitle() {
+	int key;
 	int x = 0, y = 9;
+
+	drawRect(0, 0, GBOARD_WIDTH, GBOARD_HEIGHT);
 
 	for (int k = 0; k < 10; k++) {
 		for (int i = 0; i < 3; i++) {
@@ -108,7 +111,15 @@ void printTitle1() {
 
 	SetCurrentCursorPos(38, 20);
 	printf("Press Any Key to Start");
+	while (1) {
+		if (_kbhit() != 0) {
+			key = _getch();
+			redrawGameBoard();
+			break;
+		}
+	}
 }
+
 
 void printGameOver() {
 	int x = 0, y = 5;
@@ -140,4 +151,30 @@ void GameOver() {
 		drawRect(0, 0, GBOARD_WIDTH, GBOARD_HEIGHT);
 	redrawGameBoard();
 	printGameOver();
+}
+
+
+// 아이템 설명판
+void drawItemBoard() {
+	drawRect(100, 12, 29, 18);
+
+	SetCurrentCursorPos(111, 13);
+	printf("I T E M");
+
+	SetCurrentCursorPos(104, 15);
+	printf("C  :  Stop 5 seconds");
+
+	SetCurrentCursorPos(104, 18);
+	printf("P  :  Phoenix 5 seconds");
+
+	SetCurrentCursorPos(104, 21);
+	printf("L  :  ");
+	RED printf("♥");
+	WHITE printf(" x 1");
+
+	SetCurrentCursorPos(104, 24);
+	printf("S  :  Virus attack");
+
+	SetCurrentCursorPos(104, 27);
+	printf("X  :  Bomb");
 }
