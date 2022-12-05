@@ -1,10 +1,6 @@
 #include "MyHeader.h"
 
-extern mode;
-extern next;
-extern curPosX, curPosY;
-
-//모드 선택 입력 받기
+// 모드 선택 입력 받기
 void modeKeyInput() {
 	int key;
 	while (1) {
@@ -45,7 +41,7 @@ void modeKeyInput() {
 	}
 }
 
-//모드 선택
+// 모드 선택
 void selectMode() {
 	int key;
 
