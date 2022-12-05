@@ -1,21 +1,6 @@
 #include "MyHeader.h"
 
-extern humanCurPosX, humanCurPosY;
-extern v_num;
-extern vertical_num;
-extern trackingVirus_flag;
-extern trackingVirusOneby_flag;
-extern trackingVirusVertical_flag;
-extern clockCurPosX, clockCurPosY;
-extern clock_item_flag;
-extern phoenixCurPosX, phoenixCurPosY;
-extern phoenix_item_flag;
-extern lifeCurPosX, lifeCurPosY;
-
-extern life_item_flag;
-
-
-//바이러스 충돌 검사
+// 바이러스 충돌 검사
 int DetectCollisionV() {
 	int i, j;
 
@@ -65,7 +50,7 @@ int DetectCollisionV() {
 	return 1;
 }
 
-//충돌 검사
+// 충돌 검사
 int DetectCollision(int posX, int posY) {
 
 	if (posX == 1 || posX + 1 > GBOARD_WIDTH - 3 || posY == 0 || posY == GBOARD_HEIGHT - 1)
@@ -74,8 +59,7 @@ int DetectCollision(int posX, int posY) {
 	return 1;
 }
 
-
-//추적 바이러스
+// 추적 바이러스
 void trackingVirus() {
 	if (trackingVirusOneby_flag == 0) {
 		for (int i = 0; i < 5; i++) {
@@ -213,8 +197,6 @@ void trackingVirusVertical() {
 							break;
 						}
 
-
-
 						RED
 							SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
 						printf("*");
@@ -225,21 +207,13 @@ void trackingVirusVertical() {
 		}
 	}
 }
+
 void trackingVirusHorizontal() {
-
 	for (int i = 0; i < GBOARD_WIDTH - 4; i++) {
-
 		SetCurrentCursorPos(virusHorizontal[i].x, virusHorizontal[i].y);
 		printf(" ");
-
-
 		virusHorizontal[i].y--;
-
 		SetCurrentCursorPos(virusHorizontal[i].x, virusHorizontal[i].y);
 		printf("*");
-
-
-
 	}
-
 }
