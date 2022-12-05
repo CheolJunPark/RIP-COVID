@@ -26,6 +26,14 @@ extern int phoenix_item_flag;
 extern int lifeCurPosX, lifeCurPosY;
 extern int life_item_flag;
 
+// 창 아이템
+extern spear_item_time;
+extern spear_item_time_plus_5sec;
+extern spear_clock_flag;
+
+// 아이템 먹은 횟수
+extern int cnt_eat_item;
+
 extern int curPosX, curPosY;
 extern int vertical_num;
 extern int v_num;
