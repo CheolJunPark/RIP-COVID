@@ -77,149 +77,152 @@ int DetectCollision(int posX, int posY) {
 
 //추적 바이러스
 void trackingVirus() {
+	if (trackingVirusOneby_flag == 0) {
+		for (int i = 0; i < 5; i++) {
 
-	for (int i = 0; i < 5; i++) {
+			if (virus[i].killed_flag == 0) {
 
-		if (virus[i].killed_flag == 0) {
-
-			SetCurrentCursorPos(virus[i].x, virus[i].y);
-			printf(" ");
-
-			int x, y;
-			x = virus[i].x - humanCurPosX;
-			y = virus[i].y - humanCurPosY;
-
-			if (x == 0 && y == 0)
-				continue;
-			else if (x == 0) {
-				if (y > 0)
-					virus[i].y--;
-				else
-					virus[i].y++;
-			}
-			else if (y == 0) {
-				if (x > 0)
-					virus[i].x--;
-				else
-					virus[i].x++;
-			}
-			else if (x > 0 && y > 0) {
-				virus[i].x--;
-				virus[i].y--;
-			}
-			else if (x > 0 && y < 0) {
-				virus[i].x--;
-				virus[i].y++;
-			}
-			else if (x < 0 && y > 0) {
-				virus[i].x++;
-				virus[i].y--;
-			}
-			else {
-				virus[i].x++;
-				virus[i].y++;
-			}
-
-			RED
 				SetCurrentCursorPos(virus[i].x, virus[i].y);
-			printf("*");
+				printf(" ");
+
+				int x, y;
+				x = virus[i].x - humanCurPosX;
+				y = virus[i].y - humanCurPosY;
+
+				if (x == 0 && y == 0)
+					continue;
+				else if (x == 0) {
+					if (y > 0)
+						virus[i].y--;
+					else
+						virus[i].y++;
+				}
+				else if (y == 0) {
+					if (x > 0)
+						virus[i].x--;
+					else
+						virus[i].x++;
+				}
+				else if (x > 0 && y > 0) {
+					virus[i].x--;
+					virus[i].y--;
+				}
+				else if (x > 0 && y < 0) {
+					virus[i].x--;
+					virus[i].y++;
+				}
+				else if (x < 0 && y > 0) {
+					virus[i].x++;
+					virus[i].y--;
+				}
+				else {
+					virus[i].x++;
+					virus[i].y++;
+				}
+
+				RED
+					SetCurrentCursorPos(virus[i].x, virus[i].y);
+				printf("*");
+			}
+			WHITE
 		}
-		WHITE
 	}
 }
 
 void trackingVirusOneby() {
+	if (trackingVirusOneby_flag == 0) {
+		for (int i = 0; i < v_num; i++) {
 
-	for (int i = 0; i < v_num; i++) {
-
-		if (virusOneby[i].killed_flag == 0) {
-			SetCurrentCursorPos(virusOneby[i].x, virusOneby[i].y);
-			printf(" ");
-
-			int x, y;
-			x = virusOneby[i].x - humanCurPosX;
-			y = virusOneby[i].y - humanCurPosY;
-
-			if (x == 0 && y == 0)
-				continue;
-			else if (x == 0) {
-				if (y > 0)
-					virusOneby[i].y--;
-				else
-					virusOneby[i].y++;
-			}
-			else if (y == 0) {
-				if (x > 0)
-					virusOneby[i].x--;
-				else
-					virusOneby[i].x++;
-			}
-			else if (x > 0 && y > 0) {
-				virusOneby[i].x--;
-				virusOneby[i].y--;
-			}
-			else if (x > 0 && y < 0) {
-				virusOneby[i].x--;
-				virusOneby[i].y++;
-			}
-			else if (x < 0 && y > 0) {
-				virusOneby[i].x++;
-				virusOneby[i].y--;
-			}
-			else {
-				virusOneby[i].x++;
-				virusOneby[i].y++;
-			}
-
-			RED
+			if (virusOneby[i].killed_flag == 0) {
 				SetCurrentCursorPos(virusOneby[i].x, virusOneby[i].y);
-			printf("*");
+				printf(" ");
+
+				int x, y;
+				x = virusOneby[i].x - humanCurPosX;
+				y = virusOneby[i].y - humanCurPosY;
+
+				if (x == 0 && y == 0)
+					continue;
+				else if (x == 0) {
+					if (y > 0)
+						virusOneby[i].y--;
+					else
+						virusOneby[i].y++;
+				}
+				else if (y == 0) {
+					if (x > 0)
+						virusOneby[i].x--;
+					else
+						virusOneby[i].x++;
+				}
+				else if (x > 0 && y > 0) {
+					virusOneby[i].x--;
+					virusOneby[i].y--;
+				}
+				else if (x > 0 && y < 0) {
+					virusOneby[i].x--;
+					virusOneby[i].y++;
+				}
+				else if (x < 0 && y > 0) {
+					virusOneby[i].x++;
+					virusOneby[i].y--;
+				}
+				else {
+					virusOneby[i].x++;
+					virusOneby[i].y++;
+				}
+
+				RED
+					SetCurrentCursorPos(virusOneby[i].x, virusOneby[i].y);
+				printf("*");
+			}
+			vertical_num++;
+			WHITE
 		}
-		vertical_num++;
-		WHITE
 	}
 }
 
 void trackingVirusVertical() {
+	if (trackingVirusOneby_flag == 0) {
+		if (virusVertical[0].onoff == 0) {
 
-	if (virusVertical[0].onoff == 0) {
-
-		if (virusVertical[0].x + 4 > GBOARD_WIDTH) {
-			for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
-				SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
-				printf(" ");
-			}
-			return;
-		}
-
-		for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
-			if (virusVertical[i].killed_flag == 0) {
-				if (virusVertical[i].visible == 1) {
+			if (virusVertical[0].x + 4 > GBOARD_WIDTH) {
+				for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
 					SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
 					printf(" ");
+				}
+				return;
+			}
 
-					virusVertical[i].x++;
-
-
-					if (virusVertical[i].x == 95) {
-						for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
-							SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
-							printf(" ");
-							virusVertical[i].x = 999; virusVertical[i].y = 999;
-						}
-						virusVertical[0].onoff = 1;
-						break;
-					}
-
-
-
-					RED
+			for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
+				if (virusVertical[i].killed_flag == 0) {
+					if (virusVertical[i].visible == 1) {
 						SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
-					printf("*");
+						printf(" ");
+
+						virusVertical[i].x++;
+
+
+						if (virusVertical[i].x == 95) {
+							for (int i = 0; i < GBOARD_HEIGHT - 2; i++) {
+								SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
+								printf(" ");
+								virusVertical[i].x = 999; virusVertical[i].y = 999;
+							}
+							virusVertical[0].onoff = 1;
+							break;
+						}
+
+
+
+						RED
+							SetCurrentCursorPos(virusVertical[i].x, virusVertical[i].y);
+						printf("*");
+					}
 				}
 			}
+			WHITE
 		}
-		WHITE
 	}
 }
 void trackingVirusHorizontal() {
