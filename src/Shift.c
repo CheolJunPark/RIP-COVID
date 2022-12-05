@@ -2,8 +2,14 @@
 
 // 오른쪽
 void ShiftRight(void) {
-	if (!DetectCollision(humanCurPosX + 1, humanCurPosY))
-		return;
+	if (spear_xy.get_check == 1) {
+		if (!DetectCollision(humanCurPosX + 4, humanCurPosY))
+			return;
+	}
+	else {
+		if (!DetectCollision(humanCurPosX + 1, humanCurPosY))
+			return;
+	}
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf(" ");
 	humanCurPosX += 1;
@@ -16,8 +22,14 @@ void ShiftRight(void) {
 
 // 왼쪽
 void ShiftLeft(void) {
-	if (!DetectCollision(humanCurPosX - 1, humanCurPosY))
-		return;
+	if (spear_xy.get_check == 1) {
+		if (!DetectCollision(humanCurPosX - 4, humanCurPosY))
+			return;
+	}
+	else {
+		if (!DetectCollision(humanCurPosX - 1, humanCurPosY))
+			return;
+	}
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf(" ");
 	humanCurPosX -= 1;
@@ -30,8 +42,15 @@ void ShiftLeft(void) {
 
 // 위쪽
 void ShiftUp(void) {
-	if (!DetectCollision(humanCurPosX, humanCurPosY - 1))
-		return;
+	if (spear_xy.get_check == 1) {
+		if (!DetectCollision(humanCurPosX, humanCurPosY - 2))
+			return;
+	}
+	else {
+		if (!DetectCollision(humanCurPosX, humanCurPosY - 1))
+			return;
+	}
+
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf(" ");
 	humanCurPosY -= 1;
@@ -44,8 +63,15 @@ void ShiftUp(void) {
 
 // 아래쪽
 void ShiftDown(void) {
-	if (!DetectCollision(humanCurPosX, humanCurPosY + 1))
-		return;
+	if (spear_xy.get_check == 1) {
+		if (!DetectCollision(humanCurPosX, humanCurPosY + 2))
+			return;
+	}
+	else {
+		if (!DetectCollision(humanCurPosX, humanCurPosY + 1))
+			return;
+	}
+
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf(" ");
 	humanCurPosY += 1;
