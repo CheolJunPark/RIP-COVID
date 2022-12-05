@@ -1,34 +1,6 @@
 #include "MyHeader.h"
-#include <stdlib.h>
-#include <time.h>
 
-extern start_time;
-extern end_time;
-extern humanCurPosX, humanCurPosY;
-extern clock_item_flag;
-extern phoenix_item_flag;
-extern life_item_flag;
-extern trackingVirus_flag;
-extern trackingVirusOneby_flag;
-extern trackingVirusVertical_flag;
-
-extern clockCurPosX, clockCurPosY;
-extern clock_item_time;
-extern clock_item_time_plus_5sec;
-
-extern phoenixCurPosX, phoenixCurPosY;
-extern phoenix_item_time;
-extern phoenix_item_time_plus_5sec;
-
-extern lifeCurPosX, lifeCurPosY;
-
-extern preX, preY;
-extern boom_flag;
-extern spear_flag;
-extern killed_v;
-extern v_num;
-
-
+// 시계 아이템
 void clock_item() {
 	ClockItem clock;
 	int my_number = 1;
@@ -81,6 +53,7 @@ void clock_item() {
 	}
 }
 
+// 무적 아이템
 void phoenix_item() {
 	PhoenixItem phoenix;
 	int my_number = 2;
@@ -129,6 +102,7 @@ void phoenix_item() {
 	}
 }
 
+// 생명 아이템
 void life_item() {
 	LifeItem life;
 	int my_number = 0;
@@ -162,7 +136,7 @@ void life_item() {
 
 }
 
-//spear 잔상 제거
+// spear 잔상 제거
 void pre_remove() {
 	int x, y, k;
 	int i = 0, j = 0;
@@ -285,16 +259,11 @@ void spear_wear() {
 			}
 		}
 	}
-
-
-
 	preX = humanCurPosX;
 	preY = humanCurPosY;
-
-
 }
 
-//창 좌표
+// 창 좌표
 void spear_item() {
 	if (spear_xy.get_check == 0) {
 
@@ -322,7 +291,6 @@ void spear_item() {
 
 // 폭탄 폭발
 void boom_shoot() {
-
 	int x, y;
 	int i = 1, j = 0;
 	int k = 1;
@@ -344,7 +312,6 @@ void boom_shoot() {
 			i = 1;
 		}
 	}
-
 
 	for (k = 0; k < 36; k++) {
 
@@ -397,26 +364,20 @@ void boom_shoot() {
 
 	}
 
-
-
 	for (k = 0; k < 36; k++) {
 
 		SetCurrentCursorPos(boom_ready[k].x, boom_ready[k].y);
 		printf("  ");
 
 	}
-
 	SetCurrentCursorPos(humanCurPosX, humanCurPosY);
 	printf("@");
 
 	Sleep(30);
-
-
-
 }
-//폭탄 좌표
-void boom_item() {
 
+// 폭탄 좌표
+void boom_item() {
 	if (boom_xy.get_check == 0) {
 
 		srand((unsigned int)time(NULL));
@@ -430,15 +391,11 @@ void boom_item() {
 		SetCurrentCursorPos(boom_xy.x, boom_xy.y);
 		printf("X");
 
-
 		if (boom_xy.x == humanCurPosX && boom_xy.y == humanCurPosY) {
 			boom_xy.get_check = 1;
 			SetCurrentCursorPos(boom_xy.x, boom_xy.y);
 			printf(" ");
-
 			boom_shoot();
-
 		}
-
 	}
 }
