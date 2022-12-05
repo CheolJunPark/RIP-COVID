@@ -37,6 +37,11 @@ int life_item_flag = 0;
 // 게임 오버 플래그
 int game_over_flag = 0;
 
+// 창 아이템
+int spear_item_time;
+int spear_item_time_plus_5sec;
+int spear_clock_flag = 0;
+
 // 주석 필요
 int preX = 999, preY = 999;
 int curPosX, curPosY;
@@ -47,6 +52,7 @@ int vertical_num = 0;
 int boom_flag = 0;
 int spear_flag = 0;
 int killed_v = 0;
+
 
 int main() {
 	game_util.score = 0;
