@@ -130,7 +130,7 @@ typedef struct LifeItem {
 }LifeItem;
 
 Virus* virus;
-VirusOneby virusOneby[100];
+VirusOneby virusOneby[10000];
 VirusVertical virusVertical[GBOARD_HEIGHT];
 VirusCircle virusCircle[100];
 VirusSquare virusSquare[200];
