@@ -122,14 +122,14 @@ void printTitle() {
 
 
 void printGameOver() {
-	int x = 0, y = 5;
+	int x = 0, y = 7;
 	for (int k = 0; k < 8; k++) {
 		for (int i = 0; i < 5; i++) {
 			if (k < 4)
 				x = (k * 5) * 2 + i * 2 + 30;
 			else {
 				x = ((k - 4) * 5) * 2 + i * 2 + 31;
-				y = 11;
+				y = 17;
 			}
 
 			for (int j = 0; j < 5; j++) {
